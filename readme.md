@@ -1,6 +1,6 @@
 # *location*
 
-Get your current location from the OS.
+Get your current location from the OS. It uses [`CoreLocationCLI`](https://github.com/fulldecent/corelocationcli).
 
 [![npm version](https://img.shields.io/npm/v/location.svg)](https://www.npmjs.com/package/location)
 [![dependency status](https://img.shields.io/david/derhuerst/location.svg)](https://david-dm.org/derhuerst/location)
@@ -26,7 +26,11 @@ location().then(console.log)
 This will give you something similar to the following:
 
 ```js
-todo
+{
+	  latitude:  52.547172
+	, longitude: 13.347745
+	, precision: 65  // in meters
+}
 ```
 
 
