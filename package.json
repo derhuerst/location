@@ -9,5 +9,11 @@
 	"homepage":     "https://github.com/derhuerst/location",
 	"repository":   "git://github.com/derhuerst/location.git",
 	"license":      "ISC",
-	"engines":      {"node": ">=4"}
+	"engines":      {"node": ">=4"},
+	"scripts": {
+		"download":   "curl -sOL https://github.com/fulldecent/corelocationcli/releases/download/2.0.0/CoreLocationCLI.zip",
+		"unzip":      "unzip -n -d . CoreLocationCLI.zip",
+		"cleanup":    "rm CoreLocationCLI.zip",
+		"preinstall": "npm run download && npm run unzip && npm run cleanup"
+	}
 }
