@@ -3,6 +3,7 @@
 Get your current location from the OS, using [`CoreLocationCLI`](https://github.com/fulldecent/corelocationcli).
 
 [![npm version](https://img.shields.io/npm/v/location.svg)](https://www.npmjs.com/package/location)
+[![build status](https://img.shields.io/travis/derhuerst/location.svg)](https://travis-ci.org/derhuerst/location)
 [![dependency status](https://img.shields.io/david/derhuerst/location.svg)](https://david-dm.org/derhuerst/location)
 [![dev dependency status](https://img.shields.io/david/dev/derhuerst/location.svg)](https://david-dm.org/derhuerst/location#info=devDependencies)
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/location.svg)
