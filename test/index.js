@@ -14,7 +14,7 @@ const showError = (err) => {
 
 
 
-location(path.join(__dirname, '..', 'CoreLocationCLI')).catch(showError)
+location(path.join(__dirname, 'success-mock')).catch(showError)
 .then((loc) => {
 
 	assert.strictEqual(typeof loc, 'object')
@@ -25,4 +25,4 @@ location(path.join(__dirname, '..', 'CoreLocationCLI')).catch(showError)
 	assert.strictEqual(typeof loc.precision, 'number')
 	assert.ok(loc.precision > 0)
 
-})
+}).catch(showError)
