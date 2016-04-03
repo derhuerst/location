@@ -17,12 +17,18 @@ const showError = (err) => {
 location(path.join(__dirname, 'success-mock')).catch(showError)
 .then((loc) => {
 
+	// case: access granted, location successfully computed
 	assert.strictEqual(typeof loc, 'object')
-	assert.strictEqual(typeof loc.latitude,  'number')
-	assert.ok(-90  <= loc.latitude  <=  90)
-	assert.strictEqual(typeof loc.longitude, 'number')
-	assert.ok(-180 <= loc.longitude <= 180)
-	assert.strictEqual(typeof loc.precision, 'number')
-	assert.ok(loc.precision > 0)
+	assert.strictEqual(loc.latitude,  23.456789)
+	assert.strictEqual(loc.longitude, 12.345678)
+	assert.strictEqual(loc.precision, 10)
+
+}).catch(showError)
+
+location(path.join(__dirname, 'timeout-mock'))
+.catch((err) => {
+
+	// case: access denied/disabled or unable to locate
+	assert.strictEqual(err.code, 'ETIMEOUT')
 
 }).catch(showError)
