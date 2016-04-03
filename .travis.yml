@@ -1,13 +1,6 @@
-# todo: test on multiple node versions again
-language: cpp
-os:
-  - osx
-before_install:
-  - git clone https://github.com/creationix/nvm.git /tmp/.nvm;
-    source /tmp/.nvm/nvm.sh;
-    nvm install stable;
-    nvm use --delete-prefix stable;
-install:
-  - npm install
-script:
-  - npm test
+sudo: false
+language: node_js
+node_js:
+  - 'stable'
+  - '5'
+  - '4'
