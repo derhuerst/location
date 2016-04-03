@@ -4,7 +4,7 @@
 
 const assert   = require('assert')
 
-const location = require('./index')
+const location = require('../index')
 
 const showError = (err) => {
 	console.error(err.stack)

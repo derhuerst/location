@@ -15,6 +15,6 @@
 		"unzip":      "unzip -n -d . CoreLocationCLI.zip",
 		"cleanup":    "rm CoreLocationCLI.zip",
 		"preinstall": "npm run download && npm run unzip && npm run cleanup",
-		"test":       "node test.js"
+		"test":       "node test/index.js"
 	}
 }
