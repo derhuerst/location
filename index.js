@@ -12,8 +12,9 @@ const args = [
 	, '-format', '%latitude||%longitude||%h_accuracy'
 ]
 
-const location = () => new Promise((resolve, reject) =>
-	process.execFile(executable, args, (err, out) => {
+const location = (exe) => new Promise((resolve, reject) => {
+	if (arguments.length < 1 || 'string' !== typeof exe) exe = executable
+	process.execFile(exe, args, (err, out) => {
 		if (err) return reject(err)
 		out = out.split('||')
 		resolve({
@@ -21,7 +22,8 @@ const location = () => new Promise((resolve, reject) =>
 			, longitude: parseFloat(out[1])
 			, precision: parseFloat(out[2])
 		})
-	}))
+	})
+})
 
 
 
