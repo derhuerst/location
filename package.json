@@ -14,7 +14,7 @@
 		"download":   "curl -sOL https://github.com/fulldecent/corelocationcli/releases/download/2.0.0/CoreLocationCLI.zip",
 		"unzip":      "unzip -n -d . CoreLocationCLI.zip",
 		"cleanup":    "rm CoreLocationCLI.zip",
-		"test":       "node test/index.js",
+		"test":       "node test.js",
 		"preinstall": "npm run download && npm run unzip && npm run cleanup",
 		"prepublish": "npm test"
 	}

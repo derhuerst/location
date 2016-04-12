@@ -1,3 +1,13 @@
 machine:
-  node:
-    version: 4
+  xcode:
+    version: 7.2
+
+checkout:
+  post:
+    - brew install node
+dependencies:
+  pre:
+    - npm install
+test:
+  override:
+    - npm test
