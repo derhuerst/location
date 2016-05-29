@@ -12,7 +12,7 @@ Get your current location from the OS, using [`CoreLocationCLI`](https://github.
 ## Installing
 
 ```shell
-npm install location
+npm install derhuerst/location
 ```
 
 
