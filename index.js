@@ -5,16 +5,15 @@ const process = require('child_process')
 
 
 
-const executable = path.join(__dirname, 'CoreLocationCLI')
+const exe = path.join(__dirname, 'CoreLocationCLI')
 const args = [
 	  '-once', 'YES'
 	, '-verbose'
 	, '-format', '%latitude||%longitude||%h_accuracy'
 ]
 
-const location = (exe) => new Promise((resolve, reject) => {
-	if (arguments.length < 1 || 'string' !== typeof exe) exe = executable
-	process.execFile(exe, args, {timeout: 10000}, (err, out) => {
+const native = (locate = exe) => new Promise((resolve, reject) => {
+	process.execFile(locate, args, {timeout: 10000}, (err, out) => {
 
 		if (err) {
 			if (err.signal === 'SIGTERM') return reject(Object.assign(
@@ -35,4 +34,6 @@ const location = (exe) => new Promise((resolve, reject) => {
 
 
 
-module.exports = location
+const location = () => native()
+
+module.exports = Object.assign(location, {native, nonNative})

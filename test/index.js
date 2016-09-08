@@ -10,11 +10,12 @@ const location = require('../index')
 const showError = (err) => {
 	console.error(err.stack)
 	process.exit(1)
+	throw err
 }
 
 
 
-location(path.join(__dirname, 'success-mock')).catch(showError)
+location.native(path.join(__dirname, 'success-mock')).catch(showError)
 .then((loc) => {
 
 	// case: access granted, location successfully computed
@@ -25,7 +26,7 @@ location(path.join(__dirname, 'success-mock')).catch(showError)
 
 }).catch(showError)
 
-location(path.join(__dirname, 'timeout-mock'))
+location.native(path.join(__dirname, 'timeout-mock'))
 .catch((err) => {
 
 	// case: access denied/disabled or unable to locate
