@@ -17,5 +17,8 @@
 		"test":       "node test/index.js",
 		"preinstall": "npm run download && npm run unzip && npm run cleanup",
 		"prepublish": "npm test"
+	},
+	"dependencies": {
+		"wifi-triangulate": "^1.1.2"
 	}
 }

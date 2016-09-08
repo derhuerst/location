@@ -2,6 +2,7 @@
 
 const path    = require('path')
 const process = require('child_process')
+const triangulate = require('wifi-triangulate')
 
 
 
@@ -28,12 +29,26 @@ const native = (locate = exe) => new Promise((resolve, reject) => {
 			  latitude:  parseFloat(out[0])
 			, longitude: parseFloat(out[1])
 			, precision: parseFloat(out[2])
+			, native:    true
 		})
 	})
 })
 
 
 
-const location = () => native()
+const nonNative = (locate = triangulate) => new Promise((resolve, reject) =>
+	locate((err, data) => {
+		if (err) reject(err)
+		else resolve({
+			latitude:  data.lat,
+			longitude: data.lng,
+			precision: data.accuracy,
+			native:    true
+		})
+	}))
+
+
+
+const location = () => native().catch(() => nonNative())
 
 module.exports = Object.assign(location, {native, nonNative})
