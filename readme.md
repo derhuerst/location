@@ -1,8 +1,13 @@
 # *location*
 
-Get your current location from the OS, using [`CoreLocationCLI`](https://github.com/fulldecent/corelocationcli).
+Get your current location from the OS, using [`CoreLocationCLI`](https://github.com/fulldecent/corelocationcli) and [`wifi-triangulate`](https://github.com/watson/wifi-triangulate).
 
 *Linux or Windows user?* Help me support them with this module!
+
+See also:
+
+- [`browser-location`](https://github.com/derhuerst/browser-location) for Browsers
+- [`isomorphic-location`](https://github.com/derhuerst/isomorphic-location) for Browsers & Node
 
 [![npm version](https://img.shields.io/npm/v/location.svg)](https://www.npmjs.com/package/location)
 [![build status](https://img.shields.io/travis/derhuerst/location.svg)](https://travis-ci.org/derhuerst/location)
@@ -32,6 +37,7 @@ This will give you something similar to the following:
 	  latitude:  52.547172
 	, longitude: 13.347745
 	, precision: 65  // in meters
+	, native:    true
 }
 ```
 
