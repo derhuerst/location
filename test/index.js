@@ -13,56 +13,45 @@ const showError = (err) => {
 	throw err
 }
 
+const successMock = path.join(__dirname, 'success-mock')
+const timeoutMock = path.join(__dirname, 'timeout-mock')
+
+const triangulate = (t) => (cb) => {
+	setTimeout(() => cb(null, {
+		lat:  23.456789,
+		lng: 12.345678,
+		accuracy: 15
+	}), t)
+}
 
 
-location.native(path.join(__dirname, 'success-mock')).catch(showError)
+
+location.native(5000, successMock).catch(showError)
 .then((loc) => {
-
-	// case: access granted, location successfully computed
 	assert.strictEqual(typeof loc, 'object')
 	assert.strictEqual(loc.latitude,  23.456789)
 	assert.strictEqual(loc.longitude, 12.345678)
 	assert.strictEqual(loc.precision, 10)
 	assert.strictEqual(loc.native,    true)
-
 }).catch(showError)
 
-location.native(path.join(__dirname, 'timeout-mock'))
+location.native(5000, timeoutMock)
 .catch((err) => {
-
-	// case: access denied/disabled or unable to locate
-	assert.strictEqual(err.code, 'ETIMEOUT')
-
+	assert.strictEqual(err.message, 'timeout')
 }).catch(showError)
 
 
 
-const resolveMock = () => new Promise((yay, nay) =>
-	setTimeout(() => yay({
-		latitude:  23.456789,
-		longitude: 12.345678,
-		precision: 15,
-		native:    false
-	}), 2000))
-
-location.nonNative(resolveMock).catch(showError)
+location.nonNative(5000, triangulate(1000)).catch(showError)
 .then((loc) => {
-
-	// case: access granted, location successfully computed
 	assert.strictEqual(typeof loc, 'object')
 	assert.strictEqual(loc.latitude,  23.456789)
 	assert.strictEqual(loc.longitude, 12.345678)
-	assert.strictEqual(loc.precision, 10)
+	assert.strictEqual(loc.precision, 15)
 
 }).catch(showError)
 
-const rejectMock = () => new Promise((yay, nay) =>
-	setTimeout(() => nay(new Error('timeout')), 2000))
-
-location.nonNative(rejectMock)
+location.nonNative(5000, triangulate(10000))
 .catch((err) => {
-
-	// case: access denied/disabled or unable to locate
 	assert.strictEqual(err.message, 'timeout')
-
 }).catch(showError)
