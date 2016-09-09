@@ -25,6 +25,10 @@ npm install derhuerst/location
 
 ## Usage
 
+```
+location([timeout]) // 10s by default
+```
+
 ```js
 const location = require('location')
 location().then(console.log)
