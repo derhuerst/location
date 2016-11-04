@@ -9,7 +9,6 @@ const triangulate = require('wifi-triangulate')
 const exe = path.join(__dirname, 'CoreLocationCLI')
 const args = [
 	  '-once', 'YES'
-	, '-verbose'
 	, '-format', '%latitude||%longitude||%h_accuracy'
 ]
 
