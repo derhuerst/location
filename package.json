@@ -11,7 +11,7 @@
 	"license":      "ISC",
 	"engines":      {"node": ">=6"},
 	"scripts": {
-		"download":   "curl -sOL https://github.com/fulldecent/corelocationcli/releases/download/2.0.0/CoreLocationCLI.zip",
+		"download":   "curl -sOL https://github.com/fulldecent/corelocationcli/releases/download/2.2.0/CoreLocationCLI.zip",
 		"unzip":      "unzip -n -d . CoreLocationCLI.zip",
 		"cleanup":    "rm CoreLocationCLI.zip",
 		"test":       "node test/index.js",
