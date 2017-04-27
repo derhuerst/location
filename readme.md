@@ -9,17 +9,17 @@ See also:
 - [`browser-location`](https://github.com/derhuerst/browser-location) for Browsers
 - [`isomorphic-location`](https://github.com/derhuerst/isomorphic-location) for Browsers & Node
 
-[![npm version](https://img.shields.io/npm/v/location.svg)](https://www.npmjs.com/package/location)
 [![build status](https://img.shields.io/travis/derhuerst/location.svg)](https://travis-ci.org/derhuerst/location)
 [![dependency status](https://img.shields.io/david/derhuerst/location.svg)](https://david-dm.org/derhuerst/location)
 [![dev dependency status](https://img.shields.io/david/dev/derhuerst/location.svg)](https://david-dm.org/derhuerst/location#info=devDependencies)
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/location.svg)
+[![chat on gitter](https://badges.gitter.im/derhuerst.svg)](https://gitter.im/derhuerst)
 
 
 ## Installing
 
 ```shell
-npm install derhuerst/location
+npm install location@derhuerst/location
 ```
 
 
