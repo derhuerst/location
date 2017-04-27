@@ -12,8 +12,11 @@ const args = [
 	, '-format', '%latitude||%longitude||%h_accuracy'
 ]
 
-const native = (timeout = 10000, locate = exe) =>
-	new Promise((resolve, reject) => {
+const native = (timeout, locate) => {
+	timeout || (timeout = 10000)
+	locate || (locate = exe)
+
+	return new Promise((resolve, reject) => {
 		process.execFile(locate, args, {timeout}, (err, out) => {
 
 			if (err) {
@@ -30,11 +33,14 @@ const native = (timeout = 10000, locate = exe) =>
 			})
 		})
 	})
+}
 
 
+const nonNative = (timeout, locate) => {
+	timeout || (timeout = 10000)
+	locate || (locate = triangulate)
 
-const nonNative = (timeout = 10000, locate = triangulate) =>
-	new Promise((resolve, reject) => {
+	return new Promise((resolve, reject) => {
 		let succeeded = false, timer
 		locate((err, data) => {
 			succeeded = true
@@ -51,7 +57,7 @@ const nonNative = (timeout = 10000, locate = triangulate) =>
 			if (!succeeded) reject(new Error('timeout'))
 		}, timeout)
 	})
-
+}
 
 
 const location = () => native().catch(() => nonNative())
