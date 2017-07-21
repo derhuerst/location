@@ -1,5 +1,5 @@
 {
-	"name":         "location",
+	"name":         "@derhuerst/location",
 	"description":  "Get your current location from the OS.",
 	"version":      "0.3.0",
 	"main":         "index.js",

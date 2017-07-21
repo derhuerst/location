@@ -19,7 +19,7 @@ See also:
 ## Installing
 
 ```shell
-npm install location@derhuerst/location
+npm install @derhuerst/location
 ```
 
 
