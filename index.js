@@ -4,62 +4,67 @@ const path    = require('path')
 const process = require('child_process')
 const triangulate = require('wifi-triangulate')
 
-
-
 const exe = path.join(__dirname, 'CoreLocationCLI')
 const args = [
 	  '-once', 'YES'
 	, '-format', '%latitude||%longitude||%h_accuracy'
 ]
 
-const native = (timeout, locate) => {
-	timeout || (timeout = 10000)
-	locate || (locate = exe)
+const native = (timeout, locate, cb) => {
+	timeout = timeout || 10000
+	locate = locate || exe
 
-	return new Promise((resolve, reject) => {
-		process.execFile(locate, args, {timeout}, (err, out) => {
+	process.execFile(locate, args, {timeout}, (err, out) => {
+		if (err) {
+			if (err.signal === 'SIGTERM') return cb(new Error('timeout'))
+			return cb(err)
+		}
 
-			if (err) {
-				if (err.signal === 'SIGTERM') return reject(new Error('timeout'))
-				else return reject(err)
-			}
-
-			out = out.split('||')
-			resolve({
-				  latitude:  parseFloat(out[0])
-				, longitude: parseFloat(out[1])
-				, precision: parseFloat(out[2])
-				, native:    true
-			})
+		out = out.split('||')
+		cb(null, {
+			  latitude:  parseFloat(out[0])
+			, longitude: parseFloat(out[1])
+			, precision: parseFloat(out[2])
+			, native:    true
 		})
 	})
 }
 
+const nonNative = (timeout, locate, cb) => {
+	timeout = timeout || 10000
+	locate = locate || triangulate
 
-const nonNative = (timeout, locate) => {
-	timeout || (timeout = 10000)
-	locate || (locate = triangulate)
+	let succeeded = false, timer
+	locate((err, data) => {
+		if (succeeded) return
+		succeeded = true
+		clearTimeout(timer)
 
-	return new Promise((resolve, reject) => {
-		let succeeded = false, timer
-		locate((err, data) => {
-			succeeded = true
-			clearTimeout(timer)
-			if (err) return reject(err)
-			resolve({
-				latitude:  data.lat,
-				longitude: data.lng,
-				precision: data.accuracy,
-				native:    false
-			})
+		if (err) return cb(err)
+		cb(null, {
+			latitude:  data.lat,
+			longitude: data.lng,
+			precision: data.accuracy,
+			native:    false
 		})
-		timer = setTimeout(() => {
-			if (!succeeded) reject(new Error('timeout'))
-		}, timeout)
 	})
+	timer = setTimeout(() => {
+		if (succeeded) return
+		succeeded = true
+		cb(new Error('timeout'))
+	}, timeout)
 }
 
+const location = (timeout, cb) => {
+	if ('function' === typeof timeout) {
+		cb = timeout
+		timeout = 10000
+	}
 
-const location = () => native().catch(() => nonNative())
+	native(timeout, null, (err, loc) => {
+		if (!err) return cb(null, loc)
+		nonNative(timeout, null, cb)
+	})
+}
 
 module.exports = Object.assign(location, {native, nonNative})

@@ -26,32 +26,33 @@ const triangulate = (t) => (cb) => {
 
 
 
-location.native(5000, successMock).catch(showError)
-.then((loc) => {
+location.native(5000, successMock, (err, loc) => {
+	if (err) showError(err)
+
 	assert.strictEqual(typeof loc, 'object')
 	assert.strictEqual(loc.latitude,  23.456789)
 	assert.strictEqual(loc.longitude, 12.345678)
 	assert.strictEqual(loc.precision, 10)
 	assert.strictEqual(loc.native,    true)
-}).catch(showError)
+})
 
-location.native(5000, timeoutMock)
-.catch((err) => {
+location.native(5000, timeoutMock, (err, loc) => {
+	assert.ok(err)
 	assert.strictEqual(err.message, 'timeout')
-}).catch(showError)
+})
 
 
 
-location.nonNative(5000, triangulate(1000)).catch(showError)
-.then((loc) => {
+location.nonNative(5000, triangulate(1000), (err, loc) => {
+	if (err) showError(err)
+
 	assert.strictEqual(typeof loc, 'object')
 	assert.strictEqual(loc.latitude,  23.456789)
 	assert.strictEqual(loc.longitude, 12.345678)
 	assert.strictEqual(loc.precision, 15)
+})
 
-}).catch(showError)
-
-location.nonNative(5000, triangulate(10000))
-.catch((err) => {
+location.nonNative(5000, triangulate(10000), (err, loc) => {
+	assert.ok(err)
 	assert.strictEqual(err.message, 'timeout')
-}).catch(showError)
+})

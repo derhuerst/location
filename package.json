@@ -1,7 +1,7 @@
 {
 	"name":         "@derhuerst/location",
 	"description":  "Get your current location from the OS.",
-	"version":      "0.3.0",
+	"version":      "0.5.0",
 	"main":         "index.js",
 	"files":        ["index.js"],
 	"keywords":     ["geolocation", "location", "gps", "os x", "CoreLocation"],
