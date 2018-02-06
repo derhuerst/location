@@ -1,7 +1,7 @@
 {
 	"name":         "@derhuerst/location",
 	"description":  "Get your current location from the OS.",
-	"version":      "0.5.0",
+	"version":      "1.0.0",
 	"main": "./index.js",
 	"files": [
 		"index.js",
@@ -19,7 +19,7 @@
 		"cleanup":    "rm CoreLocationCLI.zip",
 		"test":       "node test/index.js",
 		"preinstall": "npm run download && npm run unzip && npm run cleanup",
-		"prepublish": "npm test"
+		"prepublishOnly": "npm run preinstall && npm test"
 	},
 	"dependencies": {
 		"wifi-triangulate": "^1.1.2"
