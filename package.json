@@ -5,7 +5,8 @@
 	"main": "./index.js",
 	"files": [
 		"index.js",
-		"native.js"
+		"native.js",
+		"lib"
 	],
 	"keywords":     ["geolocation", "location", "gps", "os x", "CoreLocation"],
 	"author":       "Jannis R <mail@jannisr.de>",
@@ -14,12 +15,8 @@
 	"license":      "ISC",
 	"engines":      {"node": ">=4"},
 	"scripts": {
-		"download":   "curl -sOL https://github.com/fulldecent/corelocationcli/releases/download/3.0.1/CoreLocationCLI.zip",
-		"unzip":      "unzip -qq -n -d . CoreLocationCLI.zip",
-		"cleanup":    "rm CoreLocationCLI.zip",
 		"test":       "node test/index.js",
-		"preinstall": "npm run download && npm run unzip && npm run cleanup",
-		"prepublishOnly": "npm run preinstall && npm test"
+		"prepublishOnly": "npm test"
 	},
 	"dependencies": {
 		"wifi-triangulate": "^1.1.2"

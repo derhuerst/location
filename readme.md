@@ -1,6 +1,6 @@
 # *location*
 
-**Get your current location from the OS**, using [`CoreLocationCLI`](https://github.com/fulldecent/corelocationcli) and [`wifi-triangulate`](https://github.com/watson/wifi-triangulate).
+**Get your current location from the OS**, using [a small Swift helper](https://github.com/kiliankoe/location) and [`wifi-triangulate`](https://github.com/watson/wifi-triangulate).
 
 *Linux or Windows user?* Help me support them with this module!
 
@@ -21,6 +21,8 @@ See also:
 ```shell
 npm install @derhuerst/location
 ```
+
+Keep in mind that the npm package contains a binary that will be executed. If you don't trust me or think that your users won't trust me, build the binary yourself from [the source code](https://github.com/kiliankoe/location/tree/master/Sources/location).
 
 
 ## Usage

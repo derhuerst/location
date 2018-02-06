@@ -3,14 +3,13 @@
 const path    = require('path')
 const process = require('child_process')
 
-const exe = path.join(__dirname, 'CoreLocationCLI')
-const args = ['-json']
+const exe = path.join(__dirname, 'lib', 'macos-location.bin')
 
 const native = (timeout, locate, cb) => {
 	timeout = timeout || 10000
 	locate = locate || exe
 
-	process.execFile(locate, args, {timeout}, (err, out) => {
+	process.execFile(locate, [], {timeout}, (err, out) => {
 		if (err) {
 			if (err.signal === 'SIGTERM') return cb(new Error('timeout'))
 			return cb(err)

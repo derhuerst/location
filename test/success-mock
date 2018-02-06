@@ -1,4 +1,4 @@
 #!/bin/sh
 
 sleep 1
-echo '23.456789||12.345678||10'
+echo '{"timestamp":1517997228,"v_accuracy":10,"latitude":23.456789,"longitude":12.345678,"h_accuracy":10,"altitude":1300.4}'
