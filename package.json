@@ -12,7 +12,7 @@
 	"engines":      {"node": ">=4"},
 	"scripts": {
 		"download":   "curl -sOL https://github.com/fulldecent/corelocationcli/releases/download/2.2.0/CoreLocationCLI.zip",
-		"unzip":      "unzip -n -d . CoreLocationCLI.zip",
+		"unzip":      "unzip -qq -n -d . CoreLocationCLI.zip",
 		"cleanup":    "rm CoreLocationCLI.zip",
 		"test":       "node test/index.js",
 		"preinstall": "npm run download && npm run unzip && npm run cleanup",

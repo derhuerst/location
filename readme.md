@@ -26,7 +26,7 @@ npm install @derhuerst/location
 ## Usage
 
 ```js
-const location = require('location')
+const location = require('@derhuerst/location')
 
 location((err, loc) => {
 	if (err) console.error(err)
