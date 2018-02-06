@@ -4,10 +4,7 @@ const path    = require('path')
 const process = require('child_process')
 
 const exe = path.join(__dirname, 'CoreLocationCLI')
-const args = [
-	  '-once', 'YES'
-	, '-format', '%latitude||%longitude||%h_accuracy'
-]
+const args = ['-json']
 
 const native = (timeout, locate, cb) => {
 	timeout = timeout || 10000
@@ -19,12 +16,22 @@ const native = (timeout, locate, cb) => {
 			return cb(err)
 		}
 
-		out = out.split('||')
+		try {
+			out = JSON.parse(out)
+		} catch (err) {
+			return cb(err)
+		}
+		// macOS provides more details:
+		// - out.altitude
+		// - out.direction
+		// - out.speed
+		// - out.v_accuracy
+		// - out.address
 		cb(null, {
-			  latitude:  parseFloat(out[0])
-			, longitude: parseFloat(out[1])
-			, precision: parseFloat(out[2])
-			, native:    true
+			latitude: out.latitude,
+			longitude: out.longitude,
+			precision: out.h_accuracy,
+			native: true
 		})
 	})
 }
