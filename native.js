@@ -6,6 +6,10 @@ const process = require('child_process')
 const exe = path.join(__dirname, 'lib', 'macos-location.bin')
 
 const native = (timeout, locate, cb) => {
+	if ('function' === typeof timeout) {
+		locate = timeout
+		timeout = null
+	}
 	timeout = timeout || 10000
 	locate = locate || exe
 
