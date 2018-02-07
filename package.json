@@ -13,7 +13,7 @@
 	"homepage":     "https://github.com/derhuerst/location",
 	"repository":   "git://github.com/derhuerst/location.git",
 	"license":      "ISC",
-	"engines":      {"node": ">=4"},
+	"engines":      {"node": ">=6"},
 	"scripts": {
 		"test":       "node test/index.js",
 		"prepublishOnly": "npm test"
